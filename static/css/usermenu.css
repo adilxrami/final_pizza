@@ -1,0 +1,134 @@
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff8f0;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.sectionIntro {
+  font-size: 28px;
+  color: #e65100;
+  padding: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#user {
+  font-size: 35px;
+  color: #ff6d00;
+  text-align: center;
+  font-weight: 600;
+}
+
+#email {
+  text-align: center;
+  font-size: 32px;
+  color: #ff6d00;
+}
+
+.cardGrid {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 30px 15px;
+  flex-wrap: wrap;
+}
+
+
+.card {
+  width: 320px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: white;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Full-width Image with Overlay */
+.cardImage,
+.cardImageAlt {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.3s ease;
+}
+
+.cardImage:hover,
+.cardImageAlt:hover {
+  filter: brightness(1.1);
+}
+
+.cardOverlay {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+background: linear-gradient(to bottom, rgba(228, 88, 2, 0.856), rgb(239 112 18 / 70%));
+  z-index: 1;
+}
+
+
+.cardContent {
+  position: absolute;
+  z-index: 2;
+  color: white;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+.cardLabel {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffd180;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.cardTitle {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+}
+
+.cardFooter {
+  font-size: 14px;
+  color: #ffe0b2;
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 90%;
+  }
+
+  .cardImage,
+  .cardImageAlt {
+    height: 200px;
+  }
+
+  .cardTitle {
+    font-size: 20px;
+  }
+}

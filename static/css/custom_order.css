@@ -1,0 +1,41 @@
+
+.pizza{
+    text-align: center;
+    margin-top: 5%;
+}
+#customPizzaForm {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  display: flex;
+  margin:20px auto;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#customPizzaForm label {
+  font-weight: bold;
+}
+
+#customPizzaForm select,
+#customPizzaForm button {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+#customPizzaForm button {
+  background-color: #ff6b00;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#customPizzaForm button:hover {
+  background-color: #e65c00;
+}
+.priceDisplay{
+  color:030
+}

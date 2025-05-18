@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="static/css/normalize.css">
+  
+</head>
+<body>
+
+
+    <div class="container">
+    <div class="mycontainer">
+        <form action="/" method="POST">
+            <h1>Sign Up</h1>
+            <p id="myeror"></p>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="tel" name="phone" placeholder="+1 234 567 900" required />
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm password" required>
+            <button type="submit" class="signup-button">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="/signin">Sign In</a></p>
+    </div>
+</div>
+
+
+
+    <script>
+        (async function fetchErrorMessage() {
+      try {
+        const res = await fetch('/geteror');
+        const data = await res.json();
+
+        if (data.error) {
+          const myeror = document.getElementById("myeror");
+          myeror.textContent = data.error;
+          myeror.classList.add("error-box");
+        }
+      } catch (err) {
+        console.error("Failed to load error message:", err);
+      }
+    })();
+    </script>
+    <script src="static/js/signup.js"></script>
+</body>
+</html>

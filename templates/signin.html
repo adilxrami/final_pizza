@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign In</title>
+    <link rel="stylesheet" href="static/css/normalize.css" />
+</head>
+<body>
+
+<div class="container">
+    <div class="mycontainer">
+        <h1>Sign In</h1>
+        <p id="myeror"></p>
+        <form method="POST" action="/signin">
+            <input type="email" name="email" placeholder="Email" required />
+            <input type="password" name="password" placeholder="Password" required />
+            <button type="submit">Sign In</button>
+        </form>
+
+        <p>Do you have an account? <a href="/">Sign Up</a></p>
+    </div>
+</div>
+
+<script>
+  fetch("/geteror")
+    .then(res => res.json())
+    .then(data => {
+      if (data.error) {
+        const myeror = document.getElementById("myeror");
+        myeror.textContent = data.error;
+        myeror.classList.add("error-box");
+      }
+    })
+    .catch(err => {
+      console.error("Error fetching error message:", err);
+    });
+</script>
+
+</body>
+</html>

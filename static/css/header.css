@@ -1,0 +1,58 @@
+
+
+.appHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ff6600;
+  color: white;
+  padding: 10px 20px;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.navBar {
+  position: relative;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navLinks li a {
+  color: white;
+  text-decoration: none;
+}
+
+.menuToggle {
+  display: none;
+  font-size: 1.8em;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navLinks {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #ff6600;
+    width: 150px;
+    padding: 10px 0;
+  }
+
+  .navLinks.active {
+    display: flex;
+  }
+
+  .menuToggle {
+    display: block;
+  }
+}

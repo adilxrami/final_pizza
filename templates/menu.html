@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swiss Cheese Pizza</title>
+  <link rel="stylesheet" href="static/css/normalize.css">
+   <link rel="stylesheet" href="static/css/header.css">
+</head>
+<body>
+
+ <header class="appHeader">
+  <div class="logo">🍕 Swiss Pizza</div>
+  <nav class="navBar">
+    <ul class="navLinks" id="navLinks">
+      <li><a href="usermenu">Home</a></li>
+      <li><a href="menu">Menu</a></li>
+      <li><a href="order_status">Order Status</a></li>
+      <li><a href="edit_profile">User Settings</a></li>
+      <li><a href="logout" onclick="localStorage.clear()">Logout</a></li>
+    </ul>
+  </nav>
+</header>
+<h1>Swiss Cheese Pizza</h1>
+<div class="pizzaMenu">
+  <div class="pizzaCard">
+    <img src="static/images/margherita.jpg" alt="Margherita Pizza" />
+    <div class="pizzaDetails">
+      <strong>Margherita</strong> - Tomato, Mozzarella, Basil<br />
+      <em>Size:</em> Small ($8) / Medium ($10) / Large ($12)<br />
+      <em>Cheese:</em> Swiss, Cheddar
+    </div>
+  </div>
+
+  <div class="pizzaCard">
+    <img src="static/images/pepperoni.jpg" alt="Pepperoni Pizza" />
+    <div class="pizzaDetails">
+      <strong>Pepperoni</strong> - Tomato, Mozzarella, Pepperoni<br />
+      <em>Size:</em> Small ($8) / Medium ($11) / Large ($13)<br />
+      <em>Cheese:</em> Swiss, Mozzarella
+    </div>
+  </div>
+
+  <div class="pizzaCard">
+    <img src="static/images/bbq_chicken.jpg" alt="BBQ Chicken Pizza" />
+    <div class="pizzaDetails">
+      <strong>BBQ Chicken</strong> - BBQ Sauce, Mozzarella, Grilled Chicken, Red Onion<br />
+      <em>Size:</em> Small ($8) / Medium ($12) / Large ($14)<br />
+      <em>Cheese:</em> Mozzarella, Cheddar
+    </div>
+  </div>
+
+  <div class="pizzaCard">
+    <img src="static/images/veggie.jpg" alt="Veggie Pizza" />
+    <div class="pizzaDetails">
+      <strong>Veggie</strong> - Bell Peppers, Onions, Mushrooms<br />
+      <em>Size:</em> Small ($9) / Medium ($11) / Large ($14)<br />
+      <em>Cheese:</em> Swiss, Vegan Cheese
+    </div>
+  </div>
+</div>
+
+<div class="orderFormSection">
+  <h1>Order Your Pizza 🍕</h1>
+  <form action="/submit_order" method="post" class="pizzaOrderForm">
+    <fieldset>
+      <legend>Pizza 1</legend>
+
+      <label for="pizzaType1">Pizza Type:</label>
+      <select id="pizzaType1" name="pizzaType" required>
+        <option value="">-- Select Pizza --</option>
+        <option value="margherita">Margherita</option>
+        <option value="pepperoni">Pepperoni</option>
+        <option value="bbq_chicken">BBQ Chicken</option>
+        <option value="veggie">Veggie</option>
+      </select><br><br>
+
+      <label for="quantity1">Quantity:</label>
+      <input type="number" id="quantity1" name="quantity" min="1" value="1" required><br><br>
+
+      <label for="size1">Size:</label>
+      <select id="size1" name="size" required>
+        <option value="small">Small</option>
+        <option value="medium">Medium</option>
+        <option value="large">Large</option>
+      </select><br><br>
+
+      <label for="crust1">Crust Type:</label>
+      <select id="crust1" name="crust" required>
+        <option value="thin">Thin</option>
+        <option value="thick">Thick</option>
+        <option value="stuffed">Stuffed</option>
+      </select><br><br>
+    </fieldset>
+
+    <input type="hidden" id="priceInput" name="price" value="0.00" />
+    <p><strong>Total Price: $<span id="priceDisplay">0.00</span></strong></p><br>
+    <input type="submit" value="Place Order">
+  </form>
+</div>
+
+
+<script src="static/js/header.js"></script>
+<script>
+  const bp = { margherita: 8, pepperoni: 10, bbq_chicken: 12, veggie: 9 },
+      sp = { small: 0, medium: 2, large: 4 },
+      cp = { thin: 0, thick: 1, stuffed: 2 },
+      priceDisplay = document.getElementById("priceDisplay"),
+      priceInput = document.getElementById("priceInput"),
+      calc = () => priceDisplay.textContent = priceInput.value = (((bp[document.getElementById("pizzaType1").value] || 0) + sp[document.getElementById("size1").value] + cp[document.getElementById("crust1").value]) * (+document.getElementById("quantity1").value || 1)).toFixed(2);
+
+["pizzaType1", "size1", "crust1", "quantity1"].forEach(id =>
+  document.getElementById(id).addEventListener("change", calc)
+);
+
+calc();
+
+</script>
+</body>
+</html>

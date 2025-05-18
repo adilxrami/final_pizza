@@ -1,0 +1,114 @@
+.pizzaMenu {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 20px; 
+  justify-content: center;
+  padding: 20px;
+  max-width: 1400px; 
+}
+
+h1 {
+  text-align: center;
+}
+
+.pizzaCard {
+  margin: 20px auto;
+  width: 200px;
+  text-align: center;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  transition: transform 0.3s ease;
+}
+
+.pizzaCard:hover {
+  transform: scale(1.05);
+}
+
+.pizzaCard img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.pizzaDetails {
+  font-size: 14px;
+  color: #333;
+}
+
+.pizzaDetails strong {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.pizzaDetails em {
+  font-style: italic;
+  color: #555;
+}
+
+.orderFormSection {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 25px;
+  background-color: #fff7e6;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.orderFormSection h1 {
+  text-align: center;
+  color: #cc3300;
+  margin-bottom: 20px;
+}
+
+fieldset {
+  border: 2px solid #ffa500;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #fffaf0;
+}
+
+legend {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #cc6600;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #333;
+}
+
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  display: block;
+  width: 100%;
+  background-color: #ff6600;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #cc5200;
+}

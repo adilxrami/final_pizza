@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Status</title>
+  <link rel="stylesheet" href="/static/css/header.css">
+  <style>
+    table { border-collapse: collapse; width: 100%; }
+    th, td { padding: 8px; text-align: left; border: 1px solid #ddd; }
+    th { background-color: #f2f2f2; }
+    .order-list { margin-bottom: 40px; }
+  </style>
+</head>
+<body>
+  <header class="appHeader">
+  <div class="logo">🍕 Swiss Pizza</div>
+  <nav class="navBar">
+    <ul class="navLinks" id="navLinks">
+      <li><a href="usermenu">Home</a></li>
+      <li><a href="menu">Menu</a></li>
+      <li><a href="order_status">Order Status</a></li>
+      <li><a href="edit_profile">User Settings</a></li>
+      <li><a href="logout" onclick="localStorage.clear()">Logout</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="adil-search-container">
+  <input type="text" id="searchInput" placeholder="Search orders..." onkeyup="searchOrders()" class="adil-search-input">
+</div>
+
+<div class="order-list">
+  <h2>Order Status</h2>
+  <table id="ordersTable">
+    <thead>
+      <tr>
+        <th>Quantity</th>
+        <th>Size</th>
+        <th>Crust</th>
+        <th>Pizza Type</th>
+        <th>Price</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="regularOrdersBody">
+  
+    </tbody>
+  </table>
+</div>
+
+
+<div class="order-list">
+  <h2>Custom Orders</h2>
+  <table id="customOrdersTable">
+    <thead>
+      <tr>
+        <th>Quantity</th>
+        <th>Size</th>
+        <th>Crust</th>
+        <th>Cheese</th>
+        <th>Toppings</th>
+        <th>Price</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="customOrdersBody">
+    
+    </tbody>
+  </table>
+</div><script>
+  const toggleEdit = (id, isCustom = false) => {
+    const row = document.getElementById((isCustom ? "customEdit" : "edit") + id);
+    if (row) row.style.display = row.style.display === "none" ? "table-row" : "none";
+  };
+
+  const showEdit = id => toggleEdit(id);
+  const showCustomEdit = id => toggleEdit(id, true);
+  const hideEdit = id => document.getElementById("edit" + id)?.style.setProperty('display', 'none');
+  const hideCustomEdit = id => document.getElementById("customEdit" + id)?.style.setProperty('display', 'none');
+
+  function searchOrders() {
+    const filter = document.getElementById("searchInput").value.toLowerCase();
+
+    const tables = [document.getElementById("ordersTable"), document.getElementById("customOrdersTable")];
+
+    tables.forEach(table => {
+      const rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+
+        // Skip rows that are edit rows
+        if (row.id.startsWith("edit") || row.id.startsWith("customEdit")) {
+          row.style.display = "none";
+          continue;
+        }
+
+        const cells = row.getElementsByTagName("td");
+        let match = false;
+
+        for (let j = 0; j < cells.length; j++) {
+          if (cells[j] && cells[j].innerText.toLowerCase().includes(filter)) {
+            match = true;
+            break;
+          }
+        }
+
+        row.style.display = match ? "" : "none";
+      }
+    });
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("searchInput").addEventListener("input", searchOrders);
+  });
+</script>
+
+  <script src="/static/js/edit_order.js"></script>
+</body>
+</html>

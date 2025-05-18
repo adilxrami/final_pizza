@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Make Your Pizza</title>
+  <link rel="stylesheet" href="/static/css/normalize.css">
+  <link rel="stylesheet" href="/static/css/header.css">
+</head>
+<body>
+
+<header class="appHeader">
+  <div class="logo">🍕 Swiss Pizza</div>
+  <nav class="navBar">
+   
+    <ul class="navLinks" id="navLinks">
+      <li><a href="usermenu">Home</a></li>
+      <li><a href="menu">Menu</a></li>
+      <li><a href="order_status">Order Status</a></li>
+      <li><a href="edit_profile">User Settings</a></li>
+      <li><a href="logout" onclick="localStorage.clear()">Logout</a></li>
+    </ul>
+  </nav>
+</header>
+
+  <main>
+<h2 class="pizza">Make Your Pizza</h2>
+<form id="customPizzaForm" action="/custom_order" method="POST">
+  <label for="size">Size</label>
+  <select id="size" name="size">
+    <option value="8">Small ($8)</option>
+    <option value="10">Medium ($10)</option>
+    <option value="12">Large ($12)</option>
+  </select>
+
+  <label for="crust">Crust Type</label>
+  <select id="crust" name="crust">
+    <option>Thin</option>
+    <option>Thick</option>
+    <option>Cheese-Stuffed</option>
+  </select>
+
+  <label for="cheese">Cheese</label>
+  <select id="cheese" name="cheese">
+    <option value="0">Swiss</option>
+    <option value="1">Cheddar (+$1)</option>
+    <option value="1.5">Mozzarella (+$1.5)</option>
+    <option value="2">Vegan (+$2)</option>
+  </select>
+
+  <label for="toppings">(Toppings: select multiple)</label>
+  <select id="toppings" name="toppings" multiple size="5">
+    <option value="mushrooms">Mushrooms ($0.50)</option>
+    <option value="olives">Olives ($0.50)</option>
+    <option value="onions">Onions ($0.50)</option>
+    <option value="pepperoni">Pepperoni ($1.00)</option>
+    <option value="sausage">Sausage ($1.00)</option>
+    <option value="peppers">Peppers ($0.50)</option>
+    <option value="tomatoes">Tomatoes ($0.50)</option>
+    <option value="spinach">Spinach ($0.50)</option>
+    <option value="pineapple">Pineapple ($0.50)</option>
+    <option value="bacon">Bacon ($1.00)</option>
+  </select>
+
+  <label for="quantity">Quantity:</label>
+  <input type="number" id="quantity" name="quantity" min="1" value="1" required><br><br>
+
+  <p><strong>Total Price: $<span id="priceDisplay">0.00</span></strong></p>
+
+  <button type="submit">Place Order</button>
+</form>
+</main>
+<script>
+window.onload = function () {
+  const f = document.getElementById("customPizzaForm");
+  const p = document.getElementById("priceDisplay");
+  const quantityInput = document.getElementById("quantity");
+
+  const updatePrice = () => {
+    let total = +f.size.value + +f.cheese.value;
+
+    for (let o of f.toppings.selectedOptions)
+      total += ["pepperoni", "sausage", "bacon"].includes(o.value) ? 1 : 0.5;
+
+    total *= +quantityInput.value;
+    p.textContent = total.toFixed(2);
+  };
+
+  f.onchange = updatePrice;
+  quantityInput.oninput = updatePrice;
+
+  updatePrice();
+};
+
+
+</script>
+
+</body>
+</html>

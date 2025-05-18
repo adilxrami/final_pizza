@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="static/css/normalize.css">
+  <link rel="stylesheet" href="static/css/header.css">
+</head>
+<body>
+<header class="appHeader">
+  <div class="logo">🍕 Swiss Pizza</div>
+  <nav class="navBar">
+    <ul class="navLinks" id="navLinks">
+      <li><a href="usermenu">Home</a></li>
+      <li><a href="menu">Menu</a></li>
+      <li><a href="order_status">Order Status</a></li>
+      <li><a href="edit_profile">User Settings</a></li>
+      <li><a href="logout" onclick="localStorage.clear()">Logout</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <h3 class="sectionIntro">Craving pizza? You’re in the right place!</h3>
+  <h1 id="user">Welcome,</h1>
+  <p id="email">Your email: </p>
+
+  <div class="cardGrid">
+
+    <div class="card">
+      <a href="menu">
+        <div class="cardImage">
+          <div class="cardOverlay"></div>
+          <div class="cardContent">
+            <div class="cardLabel">Menu</div>
+            <div class="cardTitle">Browse Our Pizzas</div>
+            <div class="cardFooter">25 mins | 20 Servings</div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+
+    <div class="card">
+      <a href="custom_order">
+        <div class="cardImageAlt">
+          <div class="cardOverlay"></div>
+          <div class="cardContent">
+            <div class="cardLabel">Custom Pizza</div>
+            <div class="cardTitle">Create Your Own</div>
+            <div class="cardFooter">35 mins | 20 Servings</div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</main>
+
+ <script>
+   fetch("/api/user_info")
+      .then(response => response.json())
+      .then(data => {
+        const { username, email, success } = data;
+
+        document.getElementById("user").textContent = "Welcome, " + username;
+        document.getElementById("email").textContent = "Your Email is: " + email;
+
+        if (success) {
+          document.getElementById("success-message").textContent = success;
+        }
+
+        localStorage.setItem("username", username);
+        localStorage.setItem("email", email);
+      })
+      .catch(error => console.error("Error fetching user info:", error));
+  </script>
+
+</body>
+</html>
