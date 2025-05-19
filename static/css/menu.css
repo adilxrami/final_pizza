@@ -112,3 +112,44 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: #cc5200;
 }
+@media (max-width: 350px) {
+  .pizzaCard {
+    width: 100%;
+    margin: 10px auto;
+    padding: 10px;
+  }
+
+  .pizzaMenu {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .orderFormSection {
+    padding: 15px;
+    margin: 20px 10px;
+  }
+
+  input[type="submit"] {
+    font-size: 1em;
+    padding: 10px;
+  }
+
+  fieldset {
+    padding: 15px;
+  }
+
+  label,
+  input,
+  select {
+    font-size: 0.9em;
+  }
+  #quantity,
+#pizzaType1,
+#size1,
+#crust1 {
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+}

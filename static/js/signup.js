@@ -31,7 +31,6 @@
     }
   }
 
-  // Password length and uppercase letter check
   if (!errorMessage) {
     if (password.length < 8) {
       errorMessage = "Password must be at least 8 characters long.";
@@ -43,6 +42,14 @@
   if (!errorMessage && password !== confirmPassword) {
     errorMessage = "Passwords do not match.";
   }
+document.getElementById("signupForm").addEventListener("submit", function (e) {
+  const username = document.getElementById("username").value;
+  if (/^\d+$/.test(username)) {
+    e.preventDefault();
+    document.getElementById("myeror").textContent = "Username cannot be only numbers.";
+    document.getElementById("myeror").classList.add("error-box");
+  }
+});
 
   if (errorMessage) {
     e.preventDefault();

@@ -95,7 +95,7 @@ async function fetchOrders() {
                 <option value="medium" ${order.size === 'medium' ? 'selected' : ''}>Medium</option>
                 <option value="large" ${order.size === 'large' ? 'selected' : ''}>Large</option>
               </select><br><br>
-                <label for="size1">Crust Type:</label>
+                 <label for="size1">Crust Type:</label>
             <select id="crust1" name="crust" required>
               <option value="thin" ${order.crust === 'thin' ? 'selected' : ''}>Thin</option>
               <option value="thick" ${order.crust === 'thick' ? 'selected' : ''}>Thick</option>
