@@ -88,14 +88,14 @@ async function fetchOrders() {
               <option value="bbq_chicken" ${order.pizza_type === "bbq_chicken" ? "selected" : ""}>BBQ Chicken</option>
               <option value="veggie" ${order.pizza_type === "veggie" ? "selected" : ""}>Veggie</option>
             </select><br>
-         
+        
               <label for="size1">Size:</label>
               <select id="size1" name="size" required>
                 <option value="small" ${order.size === 'small' ? 'selected' : ''}>Small</option>
                 <option value="medium" ${order.size === 'medium' ? 'selected' : ''}>Medium</option>
                 <option value="large" ${order.size === 'large' ? 'selected' : ''}>Large</option>
               </select><br><br>
-                 <label for="size1">Crust Type:</label>
+                <label for="size1">Crust Type:</label>
             <select id="crust1" name="crust" required>
               <option value="thin" ${order.crust === 'thin' ? 'selected' : ''}>Thin</option>
               <option value="thick" ${order.crust === 'thick' ? 'selected' : ''}>Thick</option>
@@ -140,7 +140,7 @@ async function fetchOrders() {
               <option value="thick" ${order.crust === 'thick' ? 'selected' : ''}>Thick</option>
               <option value="stuffed" ${order.crust === 'stuffed' ? 'selected' : ''}>Stuffed</option>
             </select><br><br>
-           <label for="cheese">Cheese:</label>
+          <label for="cheese">Cheese:</label>
 <select id="cheese" name="cheese" required>
   <option value="0" ${order.cheese === '0' ? 'selected' : ''}>Swiss</option>
   <option value="1" ${order.cheese === '1' ? 'selected' : ''}>Cheddar (+$1)</option>

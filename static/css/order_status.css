@@ -113,3 +113,81 @@ button:disabled {
   border-color: #ff5100;
   box-shadow: 0 0 0 2px rgba(241, 99, 4, 0.25);
 }
+
+tr[id^="editForm"],
+tr[id^="editCustomForm"] {
+  background-color: #fff8e1; 
+}
+
+
+.editorderform {
+  padding: 10px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+
+.editorderform label {
+  display: inline-block;
+  width: 80px;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Inputs and selects */
+.editorderform input,
+.editorderform select {
+  padding: 6px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+
+.editorderform button {
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  margin-left: 10px;
+  color: white;
+}
+
+
+.editorderform button[type="submit"] {
+  background-color: #4caf50; 
+}
+
+
+.editorderform button[type="submit"]:hover {
+  background-color: #45a045;
+}
+
+
+.editorderform button.canceledit {
+  background-color: #e74c3c; 
+}
+
+
+.editorderform button.canceledit:hover {
+  background-color: #c0392b;
+}
+
+/*this is my own framework is called adil framework */
+@media (max-width: 600px) {
+  .editorderform label,
+  .editorderform input,
+  .editorderform select,
+  .editorderform button {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+  }
+  
+  .editorderform button {
+    margin-left: 0;
+  }
+}
