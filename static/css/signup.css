@@ -93,3 +93,12 @@ p a:hover {
     font-size: 0.95em;
     display: block;           
 }
+  .passwordhint {
+      display: none;
+      font-size: 0.85rem;
+      color: #fcfcfc;
+      margin-bottom: 1rem;
+      background-color: #ff4d4d;
+      padding: 0.5rem;
+      border-radius: 4px;
+    }
