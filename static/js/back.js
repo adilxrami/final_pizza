@@ -1,9 +1,4 @@
 
-  function toggleMenu() {
-    const navLinks = document.getElementById('navLinks');
-    navLinks.classList.toggle('active');
-  }
-
  const pizzaBg = document.createElement("div");
   pizzaBg.className = "pizza-bg";
   document.body.appendChild(pizzaBg);
