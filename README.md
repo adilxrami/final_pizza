@@ -23,7 +23,6 @@ User needs to have MySQL installed and running (e.g., via XAMPP) for the databas
 - [x] It is available on GitHub.
 - [x] It uses the Flask web framework.
 - [x] It uses at least one module from the Python Standard Library other than the random module.  
-  Module name: `datetime` (for order timestamps)  
 - [x] It contains at least one class written by you that has both properties and methods. It uses `__init__()` to let the class initialize the object's attributes (note that `__init__()` doesn't count as a method). This includes instantiating the class and using the methods in your app.
 this is the main things that has been handled in the project :
 Project Completion Checklist
@@ -37,11 +36,21 @@ Module name: datetime (for order timestamps)
 
  It contains at least one class written by you that has both properties and methods. It uses __init__() to initialize the object's attributes (note that __init__() itself does not count as a method).
 
-File name for the class definition: models.py
+File name for the class definition “crud.py”
+class OrderService:
+ile name for the class definition:
+services/order_service.py (adjust if the path is different)
 
-Line number(s) for the class definition: 5-30
+Line number(s) for the class definition:
+Lines 4 to 39
+Name of two properties:
+self.Session
+(Internally used: engine, though it's not stored as an instance attribute)
+Name of two methods:
+get_regular_orders()
 
-Name of two properties: size, toppings
+delete_order(order_id)
+Name of two properties: 
 
 Name of two methods: calculate_price(), add_topping()
 
@@ -54,19 +63,15 @@ File name and line numbers where the methods are used: app.py lines 45-70
  It uses SQLAlchemy ORM with a MySQL database for data persistence; no file read/write operations are performed.
 
  It contains conditional statements.
-
-File name: app.py
-
-Line number(s): 80-85
-
- It contains loops.
-
-File name: templates/custom_pizza.html
-
-Line number(s): 35-50 (looping over toppings to display checkboxes)
-
+File name = “crud.py”
+if order:
+    session.delete(order)
+    session.commit()
+    return True
+return False
+(Lines 19–25 in your OrderService class) in crud.py file
  It lets the user enter a value in a text box at some point. This value is received and processed by your backend Python code.
-
+Signup , order_status
  It does not generate any error message even if the user enters wrong input (graceful error handling).
 
  It is styled using your own CSS, including a responsive layout for desktop and mobile.
