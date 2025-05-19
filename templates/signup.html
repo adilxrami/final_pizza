@@ -5,7 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <link rel="stylesheet" href="static/css/normalize.css">
-  
+  <style>
+       body {
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .pizza-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .pizza-piece {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0.15;
+    transform: rotate(calc(360deg * var(--r)));
+  }
+  </style>
 </head>
 <body>
 
@@ -58,5 +80,6 @@
   });
     </script>
     <script src="static/js/signup.js"></script>
+<script src="static/js/back.js"></script>
 </body>
 </html>
