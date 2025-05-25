@@ -5,13 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Edit Profile</title>
   <link rel="stylesheet" href="static/css/normalize.css">
+  <style>
+    .error-box {
+      color: #b00020;
+      background-color: #fddede;
+      border: 1px solid #b00020;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
 
   <div class="container">
     <div class="mycontainer">
-      <form action="/edit_profile" method="POST">
+      <form action="/edit_profile" method="POST" id="editProfileForm">
         <h1>Edit Profile</h1>
+
+        <!-- Error message placeholder -->
+        <p id="myeror"></p>
+
         <input type="text" name="username" placeholder="Username" required>
         <input type="email" name="email" placeholder="Email" required>
         <input type="tel" name="phone" placeholder="+1 234 567 900" required>
@@ -26,6 +40,7 @@
 
   <script>
   document.addEventListener("DOMContentLoaded", function () {
+      
       fetch("/api/user_info")
           .then(response => response.json())
           .then(data => {
@@ -38,6 +53,32 @@
               document.querySelector('input[name="phone"]').value = data.phone || "";
           })
           .catch(error => console.error("Fetch error:", error));
+
+      // Fetch error messages from backend and display
+      (async function fetchErrorMessage() {
+        try {
+          const res = await fetch('/geteror');
+          const data = await res.json();
+
+          if (data.error) {
+            const myeror = document.getElementById("myeror");
+            myeror.textContent = data.error;
+            myeror.classList.add("error-box");
+          }
+        } catch (err) {
+          console.error("Failed to load error message:", err);
+        }
+      })();
+
+      // Password confirmation client-side check
+      document.getElementById('editProfileForm').addEventListener('submit', function(e) {
+        const password = this.password.value;
+        const confirm = this.confirm_password.value;
+        if (password !== confirm) {
+          e.preventDefault();
+          alert("New password and confirmation do not match.");
+        }
+      });
   });
   </script>
 <script src="static/js/back.js"></script>

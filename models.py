@@ -18,6 +18,7 @@ class Order(Base):
     quantity = Column(Integer, nullable=False)
     size = Column(String(20), nullable=False)
     crust = Column(String(20), nullable=False)
+    cheese = Column(String(20), nullable=False)
     price = Column(Float)
     email = Column(String(20), nullable=False)
 class CustomOrder(Base):

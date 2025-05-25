@@ -5,29 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <link rel="stylesheet" href="static/css/normalize.css">
-  <style>
-       body {
-    position: relative;
-    overflow-x: hidden;
-  }
-
-  .pizza-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-
-  .pizza-piece {
-    position: absolute;
-    font-size: 24px;
-    opacity: 0.15;
-    transform: rotate(calc(360deg * var(--r)));
-  }
-  </style>
 </head>
 <body>
 
@@ -37,8 +14,8 @@
         <form action="/" method="POST" id="signupForm">
             <h1>Sign Up</h1>
             <p id="myeror"></p>
-                      <input type="text" id="username" name="username" placeholder="Username" pattern="^(?!\d+$)[a-zA-Z0-9_]{3,}$" required>
-<input type="email" id="email" name="email" placeholder="Email" required>
+                      <input type="text" id="username" name="username" placeholder="Username" pattern="^(?!\d+$)[a-zA-Z0-9_ ]{3,}$" required>
+<input type="email" id="email" name="email" placeholder="Email" >
 <input type="tel" id="phone" name="phone" placeholder="+1 234 567 900" required />
 <input type="password" id="password" name="password" placeholder="Password" required>
  <div class="passwordhint" id="passwordHint">
