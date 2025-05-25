@@ -35,6 +35,7 @@ def submit_order():
         price=request.form['price'],
         size=request.form['size'],
         crust=request.form['crust'],
+        cheese=request.form['cheese'],
         email=email
     )
     session_db = SessionLocal()
@@ -47,6 +48,66 @@ def submit_order():
         "message": "Order submitted successfully!"
     }), mimetype="text/html")
 
+@order_bp.route('/edit_order/<int:order_id>', methods=['POST'])
+@login_required
+def edit_order(order_id):
+    data = request.get_json()
+    if not data:
+        data = request.form
+
+    session_db = order_service.Session()
+    order = session_db.query(Order).get(order_id)
+    if not order:
+        session_db.close()
+        return redirect(url_for('orders.order_status'))
+
+    order.pizza_type = data.get('pizza_type', order.pizza_type)
+    order.size = data.get('size', order.size)
+    order.crust = data.get('crust', order.crust)
+    order.cheese = data.get('cheese', order.cheese)
+
+    try:
+        order.quantity = int(data.get('quantity', order.quantity))
+        if order.quantity < 1:
+            order.quantity = 1
+    except (ValueError, TypeError):
+        order.quantity = order.quantity
+
+    base_prices = {
+        'margherita': 8,
+        'pepperoni': 10,
+        'bbq_chicken': 12,
+        'veggie': 9
+    }
+    size_prices = {
+        'small': 0,
+        'medium': 2,
+        'large': 4
+    }
+    crust_prices = {
+        'thin': 0,
+        'thick': 1,
+        'stuffed': 2
+    }
+    cheese_prices = {
+        'mozzarella': 1,
+        'cheddar': 1.5,
+        'parmesan': 2,
+        'none': 0
+    }
+
+    base_price = base_prices.get(order.pizza_type, 0)
+    size_price = size_prices.get(order.size, 0)
+    crust_price = crust_prices.get(order.crust, 0)
+    cheese_price = cheese_prices.get(order.cheese, 0)
+
+    total_price = (base_price + size_price + crust_price + cheese_price) * order.quantity
+    order.price = round(total_price, 2)
+
+    session_db.commit()
+    session_db.close()
+
+    return redirect(url_for('orders.order_status'))
 
 @order_bp.route('/custom_order', methods=['GET', 'POST'])
 @login_required
@@ -115,29 +176,6 @@ def api_custom_orders():
             "toppings": o.toppings, "price": float(o.price)
         } for o in order_service.get_custom_orders()
     ])
-
-
-@order_bp.route('/edit_order/<int:order_id>', methods=['POST'])
-@login_required
-def edit_order(order_id):
-    data = request.get_json()
-    if not data:
-        return jsonify({'error': 'Invalid JSON data'}), 400
-
-    session_db = order_service.Session()
-    order = session_db.query(Order).get(order_id)
-    if not order:
-        return jsonify({'error': 'Order not found'}), 404
-
-    order.pizza_type = data.get('pizza_type', order.pizza_type)
-    order.size = data.get('size', order.size)
-    order.crust = data.get('crust', order.crust)
-    order.quantity = int(data.get('quantity', order.quantity))
-    session_db.commit()
-    session_db.close()
-    return redirect(url_for('orders.order_status'))
-
-
 @order_bp.route('/edit_custom_order/<int:order_id>', methods=['POST'])
 @login_required
 def edit_custom_order(order_id):
@@ -151,15 +189,35 @@ def edit_custom_order(order_id):
         session_db.close()
         return redirect(url_for('orders.order_status'))
 
-    order.quantity = int(data.get('quantity', order.quantity))
+    order.size = data.get('size', order.size)
     order.crust = data.get('crust', order.crust)
     order.cheese = data.get('cheese', order.cheese)
     order.toppings = data.get('toppings', order.toppings)
-    order.size = data.get('size', order.size)
+    order.quantity = int(data.get('quantity', order.quantity))
+    cheese_prices = {
+        "0": 0,
+        "1": 1,
+        "1.5": 1.5,
+        "2": 2
+    }
+
+    try:
+        cheese_price = cheese_prices.get(str(order.cheese), 0)
+    except Exception:
+        cheese_price = 0
+
+    toppings_list = [t.strip() for t in order.toppings.split(',') if t.strip()]
+    toppings_count = len(toppings_list)
+
+    base_price = 10
+
+    total_price = (base_price + cheese_price + toppings_count * 1) * order.quantity
+    order.price = round(total_price, 2)
+
     session_db.commit()
     session_db.close()
-    return redirect(url_for('orders.order_status'))
 
+    return redirect(url_for('orders.order_status'))
 
 @order_bp.route('/delete_order/<int:order_id>', methods=['POST'])
 @login_required

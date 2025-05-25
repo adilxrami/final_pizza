@@ -61,15 +61,12 @@
    fetch("/api/user_info")
       .then(response => response.json())
       .then(data => {
-        const { username, email, success } = data;
+        const { username, email } = data;
 
         document.getElementById("user").textContent = "Welcome, " + username;
         document.getElementById("email").textContent = "Your Email is: " + email;
 
-        if (success) {
-          document.getElementById("success-message").textContent = success;
-        }
-
+      
         localStorage.setItem("username", username);
         localStorage.setItem("email", email);
       })

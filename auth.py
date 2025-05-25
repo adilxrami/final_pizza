@@ -92,9 +92,11 @@ def edit_profile():
 
     if request.method == "POST":
         if decrypt(user.password) != request.form["oldpassword"]:
+            session_db.close()
             return redirect(url_for("auth.edit_profile", error="Old password is incorrect."))
 
         if request.form["password"] != request.form["confirm_password"]:
+            session_db.close()
             return redirect(url_for("auth.edit_profile", error="New passwords do not match."))
 
         user.name = request.form["username"]
@@ -103,15 +105,19 @@ def edit_profile():
         user.password = encrypt(request.form["password"])
         session_db.commit()
         session_db.close()
-        return redirect(url_for("auth.edit_profile", success="Profile updated."))
-
+        
+        return redirect(url_for("auth.profile_success"))
     session_db.close()
     return Response(get_html_and_css("edit_profile", "signup", data={
         "pagetitle": "Edit Profile",
-        "error": request.args.get("error"),
-        "success": request.args.get("success")
+        "error": request.args.get("error")
     }), mimetype="text/html")
-
+@auth.route("/profile_success")
+def profile_success():
+    return Response(get_html_and_css("profile_success", "order_status", data={
+        "pagetitle": "Profile Updated",
+        "message": "Your profile has been updated successfully!"
+    }), mimetype="text/html")
 @auth.route("/api/user_info")
 @login_required
 def user_info():
